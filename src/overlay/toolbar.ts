@@ -25,6 +25,7 @@ export function initToolbar(
   gatherModel: GatherModel,
   codeGatheringExtension: CodeGatheringExtension
 ): Widget[] {
+  // 获取toolbar 部件的索引
   function _getIndexAfterSpacer(notebook: NotebookPanel) {
     let index = 1;
     let toolNames = notebook.toolbar.names();

@@ -40,8 +40,10 @@ import { initLogger, log } from "../util/log";
 import { ExecutionLogger } from "./execution-logger";
 import { Clipboard } from "./gather-actions";
 
+
+// 插件的入口
 const extension: JupyterFrontEndPlugin<void> = {
-  activate: activateExtension,
+  activate: activateExtension, // 插件中注册事件
   id: "gather:gatherPlugin",
   requires: [
     ICommandPalette,
@@ -210,6 +212,11 @@ function saveHistoryOnNotebookSave(
   });
 }
 
+/**
+ * @description: 插件执行的函数
+ * @param {*}
+ * @return {*}
+ */
 function activateExtension(
   app: JupyterLab,
   palette: ICommandPalette,
@@ -221,12 +228,14 @@ function activateExtension(
 
   const notificationExtension = new NotificationExtension();
   app.docRegistry.addWidgetExtension("Notebook", notificationExtension);
+
   Clipboard.getInstance().copied.connect(() => {
     notificationExtension.showMessage(
       "Copied cells to clipboard. Type 'V' to paste."
     );
   });
 
+  // 添加小部件
   let gatherModelRegistry = new GatherModelRegistry();
   let codeGatheringExtension = new CodeGatheringExtension(
     app,
@@ -245,7 +254,8 @@ function activateExtension(
     app.commands.addCommand(command, { label, execute });
     palette.addItem({ command, category: "Clean Up" });
   }
-
+  
+  // 增加指令 toolbar 中的 cells 按钮，会将选中的结果复制到粘贴板中
   addCommand(
     "gather:gatherToClipboard",
     "Gather this result to the clipboard",

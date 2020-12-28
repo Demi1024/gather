@@ -7,6 +7,7 @@ import { UUID } from "@lumino/coreutils";
 /**
  * Abstract class for accessing the data that nbgather needs for a cell.
  */
+// abstract 声明为抽象的类，它可以包含也可以不包含抽象方法。抽象类不能被实例化，但可以被子类化
 export abstract class NbGatherCell implements Cell {
   abstract id: string;
   abstract executionCount: number;
