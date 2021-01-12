@@ -6,8 +6,9 @@ import { UUID } from "@lumino/coreutils";
 
 /**
  * Abstract class for accessing the data that nbgather needs for a cell.
+ * abstract 声明为抽象的类，它可以包含也可以不包含抽象方法。抽象类不能被实例化，但可以被子类化
+ * 基于原本的 jupyterlab 的 cell 生成一个新的 gather cell
  */
-// abstract 声明为抽象的类，它可以包含也可以不包含抽象方法。抽象类不能被实例化，但可以被子类化
 export abstract class NbGatherCell implements Cell {
   abstract id: string;
   abstract executionCount: number;
@@ -105,6 +106,7 @@ export class LogCell extends NbGatherCell {
 /**
  * Wrapper around a code cell model created by Jupyter Lab, with a consistent interface for
  * accessing key data for gathering code.
+ * 给 jupyterlab 的 cell 进行一层包装，具有一致的接口访问关键数据以收集代码
  */
 export class LabCell extends NbGatherCell {
   constructor(model: ICodeCellModel) {

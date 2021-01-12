@@ -8,6 +8,8 @@ export type UserSelection = DefSelection | OutputSelection;
 /**
  * A def selected in a cell.
  * Defined as a class so we can add a toJSON method for logging.
+ * 在单元格中选择的def
+ * 定义为一个类，这样我们可以添加一个 toJSON 方法来记录日志。
  */
 export class DefSelection {
   readonly editorDef: EditorDef;

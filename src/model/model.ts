@@ -50,6 +50,7 @@ export type GatherEventData =
 
 /**
  * Model for the state of a "gather" application.
+ * 为“收集”应用程序的状态建模。
  */
 export class GatherModel {
   constructor(executionLog: ExecutionLogSlicer<LogCell>) {
@@ -113,6 +114,7 @@ export class GatherModel {
 
   /**
    * Set the last executed cell.
+   * 设置最后执行的 cell
    */
   set lastExecutedCell(cell: Cell) {
     this._lastExecutedCell = cell;
@@ -128,6 +130,7 @@ export class GatherModel {
 
   /**
    * Set the last deleted cell.
+   * 设置最后被删除的 cell
    */
   set lastDeletedCell(cell: Cell) {
     this._lastDeletedCell = cell;
@@ -143,6 +146,7 @@ export class GatherModel {
 
   /**
    * Set the last edited cell.
+   * 设置最后被编辑的 cell
    */
   set lastEditedCell(cell: Cell) {
     this._lastEditedCell = cell;

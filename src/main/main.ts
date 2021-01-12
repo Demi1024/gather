@@ -57,6 +57,7 @@ const extension: JupyterFrontEndPlugin<void> = {
 /**
  * Extension for tracking sequences of cells executed in a notebook.
  * TODO(andrewhead): can we run the analysis on the backend with a web-worker (specifically, def-use?)
+ * 将所有需要添加到页面中的 widget 在这里注册方法
  */
 export class CodeGatheringExtension
   implements DocumentRegistry.IWidgetExtension<NotebookPanel, INotebookModel> {
@@ -101,6 +102,7 @@ export class CodeGatheringExtension
       /*
        * The order of operations here is key. First, create a model that contains a log of
        * executed cells and the state of the gather UI.
+       * 操作的顺序是关键。首先，创建一个包含日志的模型执行的单元格和聚集UI的状态
        */
       let notebookModel = notebookContext.model;
       let executionLog = new ExecutionLogSlicer<LogCell>(
@@ -113,9 +115,11 @@ export class CodeGatheringExtension
        * Then, initialize reactive UI before loading the execution log from storage. This lets us
        * update the UI automatically as we populate the log.
        */
+      // 使用新的 UI 风格
       this._toolbarWidgets = initToolbar(notebook, gatherModel, this);
       new MarkerManager(gatherModel, notebook);
-      new CellChangeListener(gatherModel, notebook);
+      // 监听 cell 的动作
+      new CellChangeListener(gatherModel, notebook); 
       new GatherController(gatherModel, this._documentManager, this._notebooks);
 
       /**
@@ -256,6 +260,7 @@ function activateExtension(
   }
   
   // 增加指令 toolbar 中的 cells 按钮，会将选中的结果复制到粘贴板中
+  
   addCommand(
     "gather:gatherToClipboard",
     "Gather this result to the clipboard",
